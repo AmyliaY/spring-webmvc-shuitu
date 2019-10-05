@@ -5,19 +5,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4" id="WebApp_1562207779660">
 	
-	<servlet id="Servlet_1562207841781">
-		<servlet-name>GPSpringMVC</servlet-name>
-		<servlet-class>com.gupaoedu.vip.mvc.framework.servlet.GPDispatcherServlet</servlet-class>
-		<init-param id="ParamValue_1562207847449">
+	<servlet>
+		<servlet-name>stDispatcherServlet</servlet-name>
+		<servlet-class>com.shuitu.framework.servlet.STDispatcherServlet</servlet-class>
+		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>application.properties</param-value>
 		</init-param>
-		<!-- 标签中的值 >= 0 时，在容器启动时加载该servlet，值越小优先级越高 -->
-		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
-	<servlet-mapping id="ServletMapping_1562207841802">
-		<servlet-name>GPSpringMVC</servlet-name>
+	<servlet-mapping>
+		<servlet-name>stDispatcherServlet</servlet-name>
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 	
