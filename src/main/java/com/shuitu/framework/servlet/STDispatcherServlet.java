@@ -51,8 +51,6 @@ public class STDispatcherServlet extends HttpServlet {
 		// 主题view层
 		initThemeResolver(context);
 
-		
-		
 		// --------SpringMVC核心实现部分------------
 		// 解析url和Method的对应关系
 		initHandlerMappings(context);
@@ -60,8 +58,6 @@ public class STDispatcherServlet extends HttpServlet {
 		initHandlerAdapters(context);
 		// ----------------------------------------
 
-		
-		
 		// 异常解析
 		initHandlerExceptionResolvers(context);
 		// 视图转发，根据视图名字匹配到一个具体模板
@@ -143,17 +139,23 @@ public class STDispatcherServlet extends HttpServlet {
 	private void initHandlerMappings(STApplicationContext context) {
 
 		Map<String, Object> ioc = context.getAll();
-		if(ioc.isEmpty()) { return; }
+		if (ioc.isEmpty()) {
+			return;
+		}
 		// 遍历出所有加了RequestMapping注解的bean
 		for (Entry<String, Object> entry : ioc.entrySet()) {
 			Object bean = entry.getValue();
-			if(!bean.getClass().isAnnotationPresent(STController.class)) { return; }
+			if (!bean.getClass().isAnnotationPresent(STController.class)) {
+				return;
+			}
 			// 加在类上的URL前缀
 			String prefixUrl = bean.getClass().getAnnotation(STRequestMapping.class).value();
 			// 遍历bean中的method
 			Method[] methods = bean.getClass().getDeclaredMethods();
 			for (Method method : methods) {
-				if(!method.isAnnotationPresent(STRequestMapping.class)){ continue; }
+				if (!method.isAnnotationPresent(STRequestMapping.class)) {
+					continue;
+				}
 				// 加在方法上的URL后缀
 				String suffixUrl = method.getAnnotation(STRequestMapping.class).value();
 				// 将url 和Handler( bean（Controller），Method）相关联
